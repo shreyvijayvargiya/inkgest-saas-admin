@@ -54,12 +54,16 @@ export const notifications = [
 ];
 
 export const roadmapItems = [
-	{ id: "r1", title: "AI-powered email suggestions", status: "planned", priority: "high" },
-	{ id: "r2", title: "Bulk export to CSV", status: "planned", priority: "medium" },
-	{ id: "r3", title: "Custom branding for templates", status: "in_progress", priority: "high" },
-	{ id: "r4", title: "Slack integration", status: "in_progress", priority: "medium" },
-	{ id: "r5", title: "Dark mode support", status: "done", priority: "high" },
-	{ id: "r6", title: "Command palette (⌘K)", status: "done", priority: "medium" },
+	{ id: "r1", title: "Integrate Stripe payment gateway", description: "Add Stripe checkout and subscription management for billing.", status: "backlog", priority: "high", assigned: ["EC", "GR"], progress: 10, attachments: 2, comments: 4 },
+	{ id: "r2", title: "Competitor landing page research", description: "Compile competitor landing page designs for inspiration. Gather screenshots and UX patterns.", status: "backlog", priority: "medium", assigned: ["HL"], progress: 0, attachments: 1, comments: 1 },
+	{ id: "r3", title: "Dark mode toggle implementation", description: "Implement theme switcher with system preference detection.", status: "backlog", priority: "medium", assigned: ["BM"], progress: 40, attachments: 3, comments: 6 },
+	{ id: "r4", title: "Set up CI/CD pipeline", description: "Configure GitHub Actions for automated testing and deployment.", status: "backlog", priority: "high", assigned: ["EC"], progress: 0, attachments: 2, comments: 2 },
+	{ id: "r5", title: "AI-powered email suggestions", description: "Integrate ML model for smart email template recommendations.", status: "in_progress", priority: "high", assigned: ["GR", "HL"], progress: 55, attachments: 4, comments: 8 },
+	{ id: "r6", title: "Bulk export to CSV", description: "Allow users to export multiple templates and data in one action.", status: "in_progress", priority: "medium", assigned: ["BM"], progress: 25, attachments: 1, comments: 3 },
+	{ id: "r7", title: "Custom branding for templates", description: "Let users add logos and custom colors to email templates.", status: "in_progress", priority: "high", assigned: ["EC"], progress: 70, attachments: 5, comments: 12 },
+	{ id: "r8", title: "Slack integration", description: "Send notifications and sync data with Slack workspace.", status: "done", priority: "medium", assigned: ["EC", "GR"], progress: 100, attachments: 2, comments: 5 },
+	{ id: "r9", title: "Dark mode support", description: "Full dark theme support across the application.", status: "done", priority: "high", assigned: ["HL", "BM"], progress: 100, attachments: 1, comments: 2 },
+	{ id: "r10", title: "Command palette (⌘K)", description: "Quick navigation and search with keyboard shortcut.", status: "done", priority: "medium", assigned: ["EC"], progress: 100, attachments: 0, comments: 1 },
 ];
 
 export const changelogEntries = [
