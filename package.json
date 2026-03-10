@@ -9,8 +9,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "next dev",
-		"build": "npm run generate:emails && next build",
-		"build:ai": "npm run generate:emails:ai && next build",
+		"build": "next build",
 		"start": "next start"
 	},
 	"dependencies": {
