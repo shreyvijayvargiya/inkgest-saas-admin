@@ -1,21 +1,21 @@
 import React from "react";
 import Link from "next/link";
-import SEO from "../lib/modules/SEO";
 
 export default function Custom404() {
-	// Use custom SEO for 404 page
-	const customSEO = {
-		title: "404 - Page Not Found - Email templates",
-		description: "The page you are looking for does not exist.",
-		keywords: "404, page not found, error",
-		ogImage: "/og-default.png",
-		ogType: "website",
-		noindex: true, // Hide 404 pages from search engines
-	};
-
 	return (
 		<>
-			<SEO customSEO={customSEO} />
+			<Head>
+				<title>404 - Page Not Found</title>
+				<meta
+					name="description"
+					content="The page you are looking for does not exist."
+				/>
+				<meta name="keywords" content="404, page not found, error" />
+				<meta property="og:image" content="/og-default.png" />
+				<meta property="og:type" content="website" />
+				<meta name="robots" content="noindex" />
+				<link rel="icon" href="/favicon.ico" />
+			</Head>
 			<div className="min-h-screen bg-zinc-50 flex items-center justify-center px-4">
 				<div className="text-center">
 					<h1 className="text-6xl font-bold text-zinc-900 mb-4">404</h1>
