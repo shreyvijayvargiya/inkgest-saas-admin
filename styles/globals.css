@@ -1641,3 +1641,35 @@
 	-webkit-overflow-scrolling: touch;
 	}
 }
+
+/* ─── CRM REAL ESTATE RESPONSIVE ─────────────────────────────────────────── */
+@media (max-width: 1200px) {
+	.crm-kpi-grid { grid-template-columns: repeat(2, 1fr) !important; }
+	.crm-charts-row { grid-template-columns: 1fr !important; }
+	.crm-bottom-row { grid-template-columns: 1fr !important; }
+	.crm-agents-listings { grid-template-columns: 1fr !important; }
+	.crm-pipeline-stats { grid-template-columns: repeat(2, 1fr) !important; }
+	.crm-calendar-layout { grid-template-columns: 1fr !important; }
+	.crm-outreach-layout { grid-template-columns: 1fr !important; }
+	.crm-settings-layout { grid-template-columns: 1fr !important; }
+	.crm-listing-detail-grid { grid-template-columns: 1fr !important; }
+	.crm-reports-kpis { grid-template-columns: repeat(2, 1fr) !important; }
+	.crm-reports-charts { grid-template-columns: 1fr !important; }
+	.crm-reports-charts2 { grid-template-columns: 1fr !important; }
+	.crm-tasks-stats { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+@media (max-width: 768px) {
+	.crm-kpi-grid { grid-template-columns: 1fr !important; }
+	.crm-pipeline-stats { grid-template-columns: 1fr !important; }
+	.crm-reports-kpis { grid-template-columns: 1fr !important; }
+	.crm-tasks-stats { grid-template-columns: 1fr !important; }
+	.crm-leads-table-header,
+	.crm-leads-table-row { grid-template-columns: 1fr 1fr 1fr !important; }
+	.crm-listings-table-header,
+	.crm-listings-table-row { grid-template-columns: 1fr 1fr 1fr !important; }
+	.crm-reports-agent-header,
+	.crm-reports-agent-row { grid-template-columns: 1fr 1fr 1fr !important; }
+	.crm-leads-layout { flex-direction: column !important; }
+	.crm-lead-detail-panel { width: 100% !important; min-width: 100% !important; }
+}

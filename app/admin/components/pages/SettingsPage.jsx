@@ -1,435 +1,184 @@
 import { useState } from "react";
-import Icon from "../Icon";
-
-function ToggleRow({ label, desc, defaultOn }) {
-	const [on, setOn] = useState(defaultOn);
-	return (
-		<div className="toggle-wrap">
-			<div className="toggle-info">
-				<div className="toggle-title">{label}</div>
-				<div className="toggle-desc">{desc}</div>
-			</div>
-			<div className={`toggle ${on ? "on" : ""}`} onClick={() => setOn(!on)} />
-		</div>
-	);
-}
+import { Card, SecHead, Pill, Avatar, Btn } from "../Shared";
+import { useCRM } from "../../RealEstateLayout";
+import { AGENTS_DATA, agentColor, agencyProfile, integrations as intgData, billing } from "../../data";
 
 export default function SettingsPage() {
-	const [activeSection, setActiveSection] = useState("profile");
-	const settingsSections = [
-		{ id: "profile", label: "Profile", icon: "user" },
-		{ id: "team", label: "Team", icon: "users" },
-		{ id: "security", label: "Security", icon: "shield" },
-		{ id: "notifications", label: "Notifications", icon: "bell" },
-		{ id: "integrations", label: "Integrations", icon: "globe" },
-		{ id: "api", label: "API Keys", icon: "key" },
-		{ id: "appearance", label: "Appearance", icon: "palette" },
-		{ id: "billing", label: "Billing", icon: "billing" },
+	const { t } = useCRM();
+	const [activeSection, setActiveSection] = useState("agency");
+	const sections = [
+		{ id: "agency", label: "Agency Profile" },
+		{ id: "agents", label: "Agent Management" },
+		{ id: "integrations", label: "Integrations" },
+		{ id: "notifications", label: "Notifications" },
+		{ id: "billing", label: "Billing" },
 	];
-
-	const renderSection = () => {
-		switch (activeSection) {
-			case "profile":
-				return (
-					<div>
-						<div
-							style={{
-								display: "flex",
-								alignItems: "center",
-								gap: 20,
-								marginBottom: 28,
-								padding: 20,
-								background: "var(--surface2)",
-								border: "1px solid var(--border)",
-								borderRadius: "var(--radius-lg)",
-							}}
-						>
-							<div
-								className="avatar"
-								style={{ width: 60, height: 60, fontSize: 22 }}
-							>
-								S
-							</div>
-							<div>
-								<div
-									style={{
-										fontFamily: "var(--font-display)",
-										fontSize: 18,
-										fontWeight: 700,
-										color: "var(--text)",
-									}}
-								>
-									Shrey
-								</div>
-								<div
-									style={{
-										fontSize: 12,
-										color: "var(--text3)",
-										marginBottom: 10,
-									}}
-								>
-									shrey@inkgest.io · Admin
-								</div>
-								<button className="btn btn-secondary" style={{ fontSize: 11 }}>
-									Change Avatar
-								</button>
-							</div>
-						</div>
-						<div className="grid-2">
-							<div className="form-group">
-								<label className="form-label">First Name</label>
-								<input className="form-input" defaultValue="Shrey" />
-							</div>
-							<div className="form-group">
-								<label className="form-label">Last Name</label>
-								<input className="form-input" defaultValue="" />
-							</div>
-						</div>
-						<div className="form-group">
-							<label className="form-label">Email Address</label>
-							<input className="form-input" defaultValue="shrey@inkgest.io" />
-						</div>
-						<div className="form-group">
-							<label className="form-label">Company / Product Name</label>
-							<input className="form-input" defaultValue="Inkgest" />
-						</div>
-						<div className="form-group">
-							<label className="form-label">Bio</label>
-							<textarea
-								className="form-input"
-								rows={3}
-								defaultValue="Solo indie hacker building Inkgest — AI-powered content workspace."
-								style={{ resize: "vertical" }}
-							/>
-						</div>
-						<button className="btn btn-primary">Save Changes</button>
-					</div>
-				);
-			case "security":
-				return (
-					<div>
-						<div className="form-group">
-							<label className="form-label">Current Password</label>
-							<input
-								className="form-input"
-								type="password"
-								placeholder="••••••••"
-							/>
-						</div>
-						<div className="form-group">
-							<label className="form-label">New Password</label>
-							<input
-								className="form-input"
-								type="password"
-								placeholder="••••••••"
-							/>
-						</div>
-						<div className="form-group">
-							<label className="form-label">Confirm New Password</label>
-							<input
-								className="form-input"
-								type="password"
-								placeholder="••••••••"
-							/>
-						</div>
-						<button className="btn btn-primary" style={{ marginBottom: 28 }}>
-							Update Password
-						</button>
-						<div className="divider" />
-						<div
-							className="card-title"
-							style={{ marginBottom: 16, fontFamily: "var(--font-display)" }}
-						>
-							Two-Factor Authentication
-						</div>
-						<ToggleRow
-							label="Authenticator App"
-							desc="Use TOTP-based 2FA (Google Authenticator, etc.)"
-							defaultOn={true}
-						/>
-						<ToggleRow
-							label="SMS Backup"
-							desc="Send OTP via SMS as backup method"
-							defaultOn={false}
-						/>
-						<ToggleRow
-							label="Login Alerts"
-							desc="Email notification on new device login"
-							defaultOn={true}
-						/>
-					</div>
-				);
-			case "api":
-				return (
-					<div>
-						<div
-							style={{
-								marginBottom: 20,
-								display: "flex",
-								alignItems: "center",
-								justifyContent: "space-between",
-							}}
-						>
-							<div>
-								<div
-									className="card-title"
-									style={{ fontFamily: "var(--font-display)", marginBottom: 4 }}
-								>
-									API Keys
-								</div>
-								<div className="card-subtitle">
-									Use these keys to authenticate API requests.
-								</div>
-							</div>
-							<button className="btn btn-primary">
-								<Icon name="plus" size={12} /> Create Key
-							</button>
-						</div>
-						{[
-							{
-								name: "Production Key",
-								key: "sk_live_••••••••••••••••••••••••2x9f",
-								created: "Jan 12, 2024",
-								last: "2 hours ago",
-								status: "active",
-							},
-							{
-								name: "Development Key",
-								key: "sk_test_••••••••••••••••••••••••8k3m",
-								created: "Feb 03, 2024",
-								last: "5 days ago",
-								status: "active",
-							},
-							{
-								name: "Webhook Secret",
-								key: "whsec_•••••••••••••••••••••••••••7p2q",
-								created: "Feb 03, 2024",
-								last: "1 day ago",
-								status: "active",
-							},
-						].map((k, i) => (
-							<div
-								key={i}
-								style={{
-									background: "var(--surface2)",
-									border: "1px solid var(--border)",
-									borderRadius: "var(--radius)",
-									padding: 16,
-									marginBottom: 10,
-								}}
-							>
-								<div
-									style={{
-										display: "flex",
-										alignItems: "center",
-										justifyContent: "space-between",
-										marginBottom: 8,
-									}}
-								>
-									<span
-										style={{
-											fontSize: 13,
-											color: "var(--text)",
-											fontWeight: 500,
-										}}
-									>
-										{k.name}
-									</span>
-									<div style={{ display: "flex", gap: 6 }}>
-										<button
-											className="btn btn-secondary"
-											style={{ fontSize: 10, padding: "3px 8px" }}
-										>
-											Copy
-										</button>
-										<button
-											className="btn btn-ghost"
-											style={{
-												fontSize: 10,
-												padding: "3px 8px",
-												color: "var(--red)",
-											}}
-										>
-											Revoke
-										</button>
-									</div>
-								</div>
-								<div
-									style={{
-										fontFamily: "var(--font-mono)",
-										fontSize: 12,
-										color: "var(--text3)",
-										marginBottom: 8,
-										background: "var(--surface3)",
-										padding: "6px 10px",
-										borderRadius: 4,
-									}}
-								>
-									{k.key}
-								</div>
-								<div
-									style={{
-										display: "flex",
-										gap: 16,
-										fontSize: 10,
-										color: "var(--text3)",
-									}}
-								>
-									<span>Created: {k.created}</span>
-									<span>Last used: {k.last}</span>
-									<span className="badge badge-green" style={{ fontSize: 9 }}>
-										{k.status}
-									</span>
-								</div>
-							</div>
-						))}
-					</div>
-				);
-			case "integrations":
-				return (
-					<div>
-						<div
-							className="card-title"
-							style={{ fontFamily: "var(--font-display)", marginBottom: 16 }}
-						>
-							Connected Integrations
-						</div>
-						{[
-							{
-								name: "Stripe",
-								desc: "Payment processing and subscription management",
-								connected: true,
-								icon: "💳",
-							},
-							{
-								name: "Resend",
-								desc: "Transactional email delivery",
-								connected: true,
-								icon: "📧",
-							},
-							{
-								name: "PostHog",
-								desc: "Product analytics and session recording",
-								connected: false,
-								icon: "📊",
-							},
-							{
-								name: "Notion",
-								desc: "Export content and reports to Notion",
-								connected: false,
-								icon: "📝",
-							},
-							{
-								name: "Slack",
-								desc: "Receive alerts and reports in Slack",
-								connected: true,
-								icon: "💬",
-							},
-							{
-								name: "GitHub",
-								desc: "Deploy hooks and version control integration",
-								connected: false,
-								icon: "🐙",
-							},
-						].map((int, i) => (
-							<div
-								key={i}
-								style={{
-									display: "flex",
-									alignItems: "center",
-									gap: 14,
-									padding: "14px 0",
-									borderBottom: "1px solid var(--border)",
-								}}
-							>
-								<div
-									style={{
-										fontSize: 22,
-										width: 40,
-										height: 40,
-										display: "flex",
-										alignItems: "center",
-										justifyContent: "center",
-										background: "var(--surface2)",
-										borderRadius: "var(--radius)",
-										border: "1px solid var(--border)",
-									}}
-								>
-									{int.icon}
-								</div>
-								<div style={{ flex: 1 }}>
-									<div
-										style={{
-											fontSize: 13,
-											color: "var(--text)",
-											marginBottom: 2,
-										}}
-									>
-										{int.name}
-									</div>
-									<div style={{ fontSize: 11, color: "var(--text3)" }}>
-										{int.desc}
-									</div>
-								</div>
-								<button
-									className={`btn ${int.connected ? "btn-secondary" : "btn-primary"}`}
-									style={{ fontSize: 11 }}
-								>
-									{int.connected ? "Disconnect" : "Connect"}
-								</button>
-							</div>
-						))}
-					</div>
-				);
-			default:
-				return (
-					<div
-						style={{
-							padding: "40px 0",
-							textAlign: "center",
-							color: "var(--text3)",
-						}}
-					>
-						<div style={{ fontSize: 24, marginBottom: 8 }}>🔧</div>
-						<div style={{ fontSize: 13 }}>Section under construction</div>
-					</div>
-				);
-		}
-	};
+	const integrations = intgData.map((i) => ({
+		...i,
+		color: i.status === "Connected" ? t.green : t.textMuted,
+	}));
 
 	return (
-		<div className="animate-in">
-			<div className="page-header">
-				<div className="page-title">Settings</div>
-				<div className="page-desc">
-					Manage your account, security, and integrations
-				</div>
-			</div>
-			<div className="settings-grid">
-				<div>
-					<div className="settings-nav">
-						{settingsSections.map((s) => (
-							<div
-								key={s.id}
-								className={`settings-nav-item ${activeSection === s.id ? "active" : ""}`}
-								onClick={() => setActiveSection(s.id)}
-							>
-								<Icon name={s.icon} size={14} />
-								{s.label}
+		<div style={{ display: "grid", gridTemplateColumns: "200px 1fr", gap: 20 }} className="crm-settings-layout">
+			<Card t={t} p={12}>
+				{sections.map((s) => (
+					<div
+						key={s.id}
+						onClick={() => setActiveSection(s.id)}
+						style={{
+							padding: "9px 12px",
+							borderRadius: 9,
+							fontSize: 13,
+							fontWeight: 600,
+							cursor: "pointer",
+							color: activeSection === s.id ? t.accent : t.textSub,
+							background: activeSection === s.id ? t.accentDim : "transparent",
+							marginBottom: 2,
+							transition: "all 0.12s",
+						}}
+					>
+						{s.label}
+					</div>
+				))}
+			</Card>
+			<div>
+				{activeSection === "agency" && (
+					<Card t={t}>
+						<SecHead t={t}>Agency Profile</SecHead>
+						{[["Agency Name", agencyProfile.name], ["Website", agencyProfile.website], ["License #", agencyProfile.license], ["Phone", agencyProfile.phone], ["Email", agencyProfile.email], ["Address", agencyProfile.address]].map(([label, val]) => (
+							<div key={label} style={{ marginBottom: 14 }}>
+								<div style={{ fontSize: 12, fontWeight: 600, color: t.textSub, marginBottom: 5 }}>{label}</div>
+								<input
+									defaultValue={val}
+									style={{
+										width: "100%",
+										padding: "9px 12px",
+										borderRadius: 9,
+										border: `1px solid ${t.border}`,
+										background: t.surfaceAlt,
+										color: t.text,
+										fontSize: 13,
+										outline: "none",
+										fontFamily: "inherit",
+									}}
+								/>
 							</div>
 						))}
-					</div>
-					<div style={{ marginTop: 16 }}>
-						<div
-							className="settings-nav-item"
-							style={{ color: "var(--red)", cursor: "pointer" }}
-						>
-							<Icon name="logout" size={14} />
-							Sign Out
+						<Btn t={t} primary>
+							Save Changes
+						</Btn>
+					</Card>
+				)}
+
+				{activeSection === "agents" && (
+					<Card t={t}>
+						<SecHead t={t} action="+ Add Agent">
+							Agent Management
+						</SecHead>
+						{AGENTS_DATA.map((a, i) => (
+							<div key={a.code} style={{ display: "flex", alignItems: "center", gap: 12, padding: "13px 0", borderBottom: i < AGENTS_DATA.length - 1 ? `1px solid ${t.border}` : "none" }}>
+								<Avatar code={a.code} color={agentColor[a.code]} size={40} />
+								<div style={{ flex: 1 }}>
+									<div style={{ fontSize: 14, fontWeight: 700, color: t.text }}>{a.name}</div>
+									<div style={{ fontSize: 12, color: t.textSub }}>
+										{a.role} · {a.listings} active listings
+									</div>
+								</div>
+								<Pill color={t.green} dim={t.greenDim} small>
+									Active
+								</Pill>
+								<Btn t={t} small>
+									Edit
+								</Btn>
+							</div>
+						))}
+					</Card>
+				)}
+
+				{activeSection === "integrations" && (
+					<Card t={t}>
+						<SecHead t={t}>Integrations</SecHead>
+						<div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+							{integrations.map((intg) => (
+								<div key={intg.name} style={{ background: t.surfaceAlt, borderRadius: 12, padding: 16, display: "flex", gap: 12, alignItems: "center" }}>
+									<div style={{ fontSize: 28 }}>{intg.icon}</div>
+									<div style={{ flex: 1 }}>
+										<div style={{ fontSize: 13, fontWeight: 700, color: t.text }}>{intg.name}</div>
+										<div style={{ fontSize: 11, color: intg.color, fontWeight: 600, marginTop: 2 }}>{intg.status}</div>
+									</div>
+									<Btn t={t} small>
+										{intg.status === "Connected" ? "Manage" : "Connect"}
+									</Btn>
+								</div>
+							))}
 						</div>
-					</div>
-				</div>
-				<div className="card">{renderSection()}</div>
+					</Card>
+				)}
+
+				{activeSection === "notifications" && (
+					<Card t={t}>
+						<SecHead t={t}>Notification Preferences</SecHead>
+						{[
+							["New lead assigned", "Email + Push"],
+							["Showing scheduled", "Email + Push"],
+							["Offer received", "Email + Push + SMS"],
+							["Lead goes cold (5 days)", "Email"],
+							["Listing status change", "Push"],
+							["Task due today", "Push"],
+							["Weekly performance report", "Email"],
+							["Team announcements", "Email + Push"],
+						].map(([label, def]) => (
+							<div key={label} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "13px 0", borderBottom: `1px solid ${t.border}` }}>
+								<div>
+									<div style={{ fontSize: 13, fontWeight: 600, color: t.text }}>{label}</div>
+									<div style={{ fontSize: 11, color: t.textSub }}>{def}</div>
+								</div>
+								<div style={{ width: 40, height: 22, borderRadius: 11, background: t.accent, cursor: "pointer", position: "relative" }}>
+									<div style={{ width: 16, height: 16, borderRadius: "50%", background: "#fff", position: "absolute", right: 3, top: 3 }} />
+								</div>
+							</div>
+						))}
+					</Card>
+				)}
+
+				{activeSection === "billing" && (
+					<Card t={t}>
+						<SecHead t={t}>Billing</SecHead>
+						<div style={{ background: t.surfaceAlt, borderRadius: 14, padding: 20, marginBottom: 16 }}>
+							<div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 12 }}>
+								<div>
+									<div style={{ fontSize: 16, fontWeight: 800, color: t.text }}>{billing.plan}</div>
+									<div style={{ fontSize: 13, color: t.textSub }}>{billing.description}</div>
+								</div>
+								<Pill color={t.green} dim={t.greenDim}>
+									Active
+								</Pill>
+							</div>
+							<div style={{ fontSize: 28, fontWeight: 800, color: t.accent }}>
+								${billing.amount}<span style={{ fontSize: 14, color: t.textSub, fontWeight: 400 }}>/mo</span>
+							</div>
+							<div style={{ fontSize: 12, color: t.textMuted, marginTop: 4 }}>Next billing: {billing.nextBilling}</div>
+						</div>
+						<div style={{ display: "flex", gap: 8, marginBottom: 20, flexWrap: "wrap" }}>
+							<Btn t={t}>Change Plan</Btn>
+							<Btn t={t}>Update Payment</Btn>
+							<Btn t={t} style={{ color: t.red, borderColor: t.red + "44" }}>
+								Cancel Plan
+							</Btn>
+						</div>
+						<div style={{ fontSize: 13, fontWeight: 700, color: t.text, marginBottom: 10 }}>Billing History</div>
+						{billing.history.map((h) => (
+							<div key={h.date} style={{ display: "flex", justifyContent: "space-between", padding: "11px 0", borderBottom: `1px solid ${t.border}`, fontSize: 13 }}>
+								<span style={{ color: t.textSub }}>{h.date}</span>
+								<span style={{ color: t.text }}>{h.desc}</span>
+								<span style={{ fontWeight: 700, color: t.text }}>{h.amount}</span>
+								<Pill color={t.green} dim={t.greenDim} small>
+									{h.status}
+								</Pill>
+							</div>
+						))}
+					</Card>
+				)}
 			</div>
 		</div>
 	);
