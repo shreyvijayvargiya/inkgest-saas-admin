@@ -1,11 +1,11 @@
 import React from "react";
-import RealEstateLayout from "../app/admin/RealEstateLayout";
+import Layout from "../app/admin/Layout";
 import "../styles/globals.css";
 
 export default function App({ Component, pageProps }) {
 	return (
-		<RealEstateLayout>
+		<Layout>
 			<Component {...pageProps} />
-		</RealEstateLayout>
+		</Layout>
 	);
 }

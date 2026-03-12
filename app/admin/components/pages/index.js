@@ -1,9 +1,0 @@
-export { default as DashboardPage } from "./DashboardPage";
-export { default as LeadsPage } from "./LeadsPage";
-export { default as ListingsPage } from "./ListingsPage";
-export { default as PipelinePage } from "./PipelinePage";
-export { default as CalendarPage } from "./CalendarPage";
-export { default as OutreachPage } from "./OutreachPage";
-export { default as TasksPage } from "./TasksPage";
-export { default as ReportsPage } from "./ReportsPage";
-export { default as SettingsPage } from "./SettingsPage";
