@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { NAV, THEMES, THEME_OPTIONS, TASKS_DATA, PAGE_TITLES, PAGE_SUB, NOTIFICATIONS } from "./data";
+import { NAV, THEMES, THEME_OPTIONS, TASKS_DATA, CLIENTS, PAGE_TITLES, PAGE_SUB, NOTIFICATIONS } from "./data";
 
 
 const CRMContext = createContext(null);
@@ -72,7 +72,7 @@ export default function Layout({ children }) {
 	if (!mounted) {
 		return (
 			<CRMContext.Provider value={contextValue}>
-				<div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: t.bg, color: t.text, fontFamily: "'Nunito', sans-serif" }}>
+				<div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: t.bg, color: t.text, fontFamily: "'DM Sans',sans-serif" }}>
 					Loading…
 				</div>
 			</CRMContext.Provider>
@@ -81,9 +81,10 @@ export default function Layout({ children }) {
 
 	return (
 		<CRMContext.Provider value={contextValue}>
-			<div className="crm-app" style={{ fontFamily: "'Nunito','Helvetica Neue',sans-serif", background: t.bg, color: t.text, minHeight: "100vh", height: "100vh", display: "flex", flexDirection: "row", overflow: "hidden", transition: "background 0.3s, color 0.3s" }} suppressHydrationWarning>
+			<div className="crm-app" style={{ fontFamily: "'DM Sans','Helvetica Neue',sans-serif", background: t.bg, color: t.text, minHeight: "100vh", height: "100vh", display: "flex", flexDirection: "row", overflow: "hidden", transition: "background 0.3s, color 0.3s" }} suppressHydrationWarning>
 				<style>{`
-					@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&display=swap');
+					@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap');
+					@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&display=swap');
 					*{box-sizing:border-box;margin:0;padding:0;}
 					::-webkit-scrollbar{width:5px;height:5px;}
 					::-webkit-scrollbar-thumb{background:${t.surfaceB};border-radius:6px;}
@@ -132,15 +133,15 @@ export default function Layout({ children }) {
 					<div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingLeft: sidebarCollapsed ? 0 : 4, marginBottom: 28 }}>
 						{!sidebarCollapsed && !isMobile && (
 							<div style={{ display: "flex", alignItems: "center", gap: 11 }}>
-								<div style={{ width: 38, height: 38, borderRadius: 14, background: `linear-gradient(135deg,${t.accent},${t.accentDeep})`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, flexShrink: 0, boxShadow: `0 4px 14px ${t.accent}40` }}>💚</div>
+								<div style={{ width: 38, height: 38, borderRadius: 10, background: t.accent, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, fontWeight: 800, color: "#fff", flexShrink: 0, fontFamily: "'Geist Mono',monospace", boxShadow: `0 4px 14px ${t.accent}40` }}>F</div>
 								<div>
-									<div style={{ fontSize: 16, fontWeight: 900, letterSpacing: -0.4, color: t.text, lineHeight: 1.2 }}>HopeCRM</div>
-									<div style={{ fontSize: 10, color: t.textMuted, fontWeight: 600 }}>Nonprofit Suite</div>
+									<div style={{ fontSize: 15, fontWeight: 800, letterSpacing: -0.4, color: t.text, lineHeight: 1.2, fontFamily: "'Geist Mono',monospace" }}>freelance<span style={{ color: t.accent }}>crm</span></div>
+									<div style={{ fontSize: 10, color: t.textMuted, fontWeight: 600 }}>Client & project hub</div>
 								</div>
 							</div>
 						)}
 						{(sidebarCollapsed || isMobile) && (
-							<div style={{ width: 38, height: 38, borderRadius: 14, background: `linear-gradient(135deg,${t.accent},${t.accentDeep})`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, margin: isMobile ? "0 auto" : "0", boxShadow: `0 4px 14px ${t.accent}40` }}>💚</div>
+							<div style={{ width: 38, height: 38, borderRadius: 10, background: t.accent, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, fontWeight: 800, color: "#fff", margin: isMobile ? "0 auto" : "0", fontFamily: "'Geist Mono',monospace", boxShadow: `0 4px 14px ${t.accent}40` }}>F</div>
 						)}
 						{!sidebarCollapsed && !isMobile && (
 							<button onClick={() => setSidebarCollapsed(true)} style={{ width: 26, height: 26, borderRadius: 8, background: t.surfaceAlt, border: `1px solid ${t.border}`, cursor: "pointer", color: t.textSub, fontSize: 12, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>‹</button>
@@ -161,11 +162,13 @@ export default function Layout({ children }) {
 									title={sidebarCollapsed && !isMobile ? item.label : undefined}
 									style={{ justifyContent: sidebarCollapsed && !isMobile ? "center" : "flex-start", padding: sidebarCollapsed && !isMobile ? "11px" : "10px 14px" }}
 								>
-									<span style={{ fontSize: 15, width: 22, textAlign: "center", flexShrink: 0, fontFamily: "monospace" }}>{item.icon}</span>
+									<span style={{ fontSize: 15, width: 22, textAlign: "center", flexShrink: 0, fontFamily: "'Geist Mono',monospace" }}>{item.icon}</span>
 									{(!sidebarCollapsed || isMobile) && (
 										<>
 											<span style={{ flex: 1 }}>{item.label}</span>
-											{item.badge && <span className="crm-badge">{item.badge}</span>}
+											{item.id === "tasks" && taskList.filter((x) => x.due === "Today" && !x.done).length > 0 && (
+												<span className="crm-badge">{taskList.filter((x) => x.due === "Today" && !x.done).length}</span>
+											)}
 										</>
 									)}
 								</div>
@@ -175,13 +178,12 @@ export default function Layout({ children }) {
 
 					<div style={{ marginTop: "auto" }}>
 						{(!sidebarCollapsed || isMobile) && (
-							<div style={{ background: t.surfaceAlt, borderRadius: 18, padding: "14px 16px", marginBottom: 12, border: `1px solid ${t.border}` }}>
-								<div style={{ fontSize: 11, color: t.accent, fontWeight: 800, marginBottom: 5, letterSpacing: 0.3 }}>2026 ANNUAL GOAL</div>
-								<div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
-									<span style={{ fontSize: 18, fontWeight: 900, color: t.text }}>69%</span>
-									<span style={{ fontSize: 11, color: t.textSub, marginTop: 3 }}>$519K / $750K</span>
+							<div style={{ background: t.surfaceAlt, borderRadius: 12, padding: "14px 16px", marginBottom: 12, border: `1px solid ${t.border}` }}>
+								<div style={{ fontSize: 11, color: t.accent, fontWeight: 800, marginBottom: 5, letterSpacing: 0.3 }}>OUTSTANDING</div>
+								<div style={{ fontSize: 18, fontWeight: 900, color: t.text, fontFamily: "'Geist Mono',monospace" }}>
+									${CLIENTS.reduce((s, c) => s + (c.outstanding || 0), 0).toLocaleString()}
 								</div>
-								<ProgressBar value={519} max={750} color={t.accent} t={t} height={7} />
+								<div style={{ fontSize: 11, color: t.textSub, marginTop: 2 }}>invoices open</div>
 							</div>
 						)}
 						<div style={{ fontSize: 10, fontWeight: 800, color: t.textMuted, letterSpacing: 1.2, paddingLeft: 4, marginBottom: 6 }}>THEME</div>
@@ -237,13 +239,13 @@ export default function Layout({ children }) {
 							<button onClick={() => setSidebarOpen(true)} className="crm-tbtn" style={{ flexShrink: 0 }} aria-label="Open menu">≡</button>
 						)}
 						<div style={{ flex: 1, display: "flex", alignItems: "center", gap: 6 }}>
-							<span style={{ fontSize: 12, color: t.textMuted, fontWeight: 600 }}>HopeCRM</span>
+							<span style={{ fontSize: 12, color: t.textMuted, fontWeight: 600 }}>freelancecrm</span>
 							<span style={{ color: t.textMuted, fontSize: 12 }}>›</span>
-							<span style={{ fontSize: 13, fontWeight: 800, color: t.text, textTransform: "capitalize" }}>{activePage}</span>
+							<span style={{ fontSize: 13, fontWeight: 800, color: t.text, textTransform: "capitalize" }}>{activePage === "timelog" ? "Time Log" : activePage}</span>
 						</div>
 						<div style={{ position: "relative" }}>
 							<span style={{ position: "absolute", left: 11, top: "50%", transform: "translateY(-50%)", fontSize: 14, color: t.textMuted }}>🔍</span>
-							<input className="crm-srch" placeholder="Search donors, grants..." />
+							<input className="crm-srch" placeholder="Search clients, projects..." />
 						</div>
 						<div style={{ display: "flex", gap: 8, alignItems: "center" }}>
 							<div style={{ position: "relative" }}>
@@ -265,7 +267,7 @@ export default function Layout({ children }) {
 								)}
 							</div>
 							<div className="crm-tbtn">⚙</div>
-							<div style={{ width: 36, height: 36, borderRadius: 12, background: t.accentDim, color: t.accent, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 800, cursor: "pointer", border: `1.5px solid ${t.accent}30` }}>AM</div>
+							<div style={{ width: 36, height: 36, borderRadius: 12, background: t.accentDim, color: t.accent, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 800, cursor: "pointer", border: `1.5px solid ${t.accent}30`, fontFamily: "'Geist Mono',monospace" }}>AR</div>
 						</div>
 					</header>
 
@@ -279,10 +281,10 @@ export default function Layout({ children }) {
 								{activePage === "dashboard" && (
 									<>
 										<button style={{ padding: "10px 20px", borderRadius: 12, background: "transparent", border: `1px solid ${t.border}`, color: t.textSub, fontSize: 13, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>Export Report</button>
-										<button style={{ padding: "10px 20px", borderRadius: 12, background: t.accent, color: t.bg, border: "none", fontSize: 13, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>+ Add Donor</button>
+										<button style={{ padding: "10px 20px", borderRadius: 12, background: t.accent, color: "#fff", border: "none", fontSize: 13, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>+ New Client</button>
 									</>
 								)}
-								{activePage === "reports" && <button style={{ padding: "10px 20px", borderRadius: 12, background: t.accent, color: t.bg, border: "none", fontSize: 13, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>Export PDF</button>}
+								{activePage === "reports" && <button style={{ padding: "10px 20px", borderRadius: 12, background: t.accent, color: "#fff", border: "none", fontSize: 13, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>Export CSV</button>}
 							</div>
 						</div>
 						<div className="crm-pe" key={activePage}>

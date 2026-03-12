@@ -1,6 +1,6 @@
-# HopeCRM — Nonprofit / Charity CRM Template
+# Freelance CRM Template
 
-A modern CRM for nonprofits and charities built with Next.js. Manage donors, grants, campaigns, events, volunteers, tasks, reports, and communications from one dashboard. No database or backend required — customize everything by editing a single root data file.
+A modern CRM for freelancers and solo consultants built with Next.js. Manage clients, projects, invoices, proposals, time logs, tasks, reports, and settings from one dashboard. No database or backend required — customize everything by editing a single root data file.
 
 ## Quick Start
 
@@ -13,98 +13,71 @@ Open [http://localhost:3000](http://localhost:3000) to view the CRM.
 
 ## Customize Your CRM
 
-All data lives in **`data.js`** at the project root. Edit this single file to create your own HopeCRM — no store, Redux, or API needed. Each page imports from this data via `app/admin/data.js`, which re-exports from `data.js` only.
+All data lives in **`data.js`** at the project root. Edit this single file to create your own Freelance CRM — no store, Redux, or API needed. Each page imports from this data via `app/admin/data.js`, which re-exports from `data.js` only.
 
 ### Data Structure
 
 | Section | Description |
 |--------|-------------|
-| `THEMES` | Dark/light color palettes |
-| `STAFF_COLOR` | Staff code → color for avatars |
-| `DONORS` | Donor/contact records (type, tier, stage, LTV, etc.) |
-| `GRANTS` | Grant pipeline (funder, amount, deadline, stage, program) |
-| `CAMPAIGNS` | Fundraising campaigns (goal, raised, donors, status) |
-| `EVENTS` | Events (galas, webinars, board meetings, etc.) |
-| `VOLUNTEERS` | Volunteer roster, hours, skills, availability |
-| `TASKS_DATA` | To-do items with due date, priority, staff, category |
-| `EMAIL_TEMPLATES` | Email templates (category, opens, sent, subject) |
-| `SEQUENCES` | Automated email sequences |
-| `raisedOverTime` | Monthly fundraising chart data |
-| `retentionData` | Donor retention by year |
-| `sourceData` | Revenue by source (pie/bar charts) |
-| `volunteerHours` | Volunteer hours by month |
-| `STAGE_META` / `TIER_META` / `TYPE_META` | Donor stage/tier/type colors |
-| `PRIORITY_META` / `GRANT_STAGE_META` / `EVENT_TYPE_COLOR` | UI metadata |
-| `NAV` | Sidebar navigation items |
+| `THEMES` | Dark, Light, Warm, Slate color palettes |
+| `THEME_OPTIONS` | Theme switcher labels and icons |
+| `CLIENTS` | Client records (contact, stage, type, value, outstanding, tags) |
+| `PROJECTS` | Projects (client, status, budget, billed, deadline, progress, hours) |
+| `INVOICES` | Invoices (client, amount, status, issued, due, paid, line items) |
+| `PROPOSALS` | Proposals (client, title, value, status, win probability) |
+| `TIME_LOGS` | Time entries (date, client, project, hours, billable, rate) |
+| `TASKS_DATA` | To-do items (due, priority, category, client) |
+| `revenueData` | Monthly revenue vs expenses (charts) |
+| `hoursData` | Billable vs non-billable hours by week |
+| `clientRevShare` | Revenue by client (pie/bar charts) |
+| `STAGE_M` / `STATUS_M` / `INV_M` / `PROP_M` / `PRI_M` | Status and priority colors |
+| `NAV` | Sidebar navigation (id, label, icon) |
 | `PAGE_TITLES` / `PAGE_SUB` | Page titles and subtitles |
-| `STAFF_LIST` / `INTEGRATIONS` / `STAFF_PERF` | Settings and reports data |
-| `UPCOMING_DEADLINES` / `NOTIFICATIONS` | Dashboard and header data |
+| `NOTIFICATIONS` | Header notification list |
+| `INTEGRATIONS` | Settings integrations (Stripe, Notion, etc.) |
 
-### Example: Add a New Donor
+### Example: Add a New Client
 
 ```javascript
-// In data.js, add to the DONORS array:
+// In data.js, add to the CLIENTS array:
 {
   id: 9,
-  name: "New Foundation Inc",
-  type: "Foundation",
-  tier: "Major",
-  stage: "Prospect",
-  ltv: 0,
-  lastGift: 0,
-  lastDate: "—",
-  source: "Website",
-  staff: "AM",
-  email: "contact@newfoundation.org",
+  name: "Acme Corp",
+  contact: "Jane Doe",
+  email: "jane@acme.com",
   phone: "+1 (555) 000-0000",
-  notes: "Initial inquiry.",
-  tags: ["New", "Grant"],
-}
-```
-
-### Example: Add a Grant
-
-```javascript
-// In data.js, add to the GRANTS array:
-{
-  id: 7,
-  funder: "New Foundation",
-  amount: 50000,
-  deadline: "Jun 1",
   stage: "Prospect",
-  program: "Education",
-  staff: "JT",
-  reportDue: "—",
-  submitted: "—",
-  notes: "Planning to submit LOI.",
+  type: "Project",
+  value: 5000,
+  outstanding: 0,
+  started: "—",
+  tags: ["SaaS", "Dev"],
+  avatar: "AC",
+  color: "#3b82f6",
+  projects: 0,
+  lastActivity: "Today",
 }
 ```
 
 ## Pages
 
-- **Dashboard** — Annual goal, KPIs, fundraising over time, revenue by source, active campaigns, due today tasks, upcoming deadlines, top donors
-- **Donors** — List/kanban view, filters by tier and stage, donor profile panel, add donor modal
-- **Grants** — Grant list with stage filters, expandable notes, add grant modal
-- **Campaigns** — Campaign cards with progress bars, goal/raised/donors
-- **Events** — Event list with type, date, capacity, revenue, status
-- **Volunteers** — Volunteer cards with hours, skills, availability; detail panel
-- **Tasks** — Tasks by due date (Today, Tomorrow, This Week), filters, new task modal
-- **Reports** — Period selector, KPIs, fundraising over time, retention, source attribution, volunteer hours, staff performance table
-- **Communications** — Email templates and sequences tabs; template preview panel
-- **Settings** — Organization profile, staff & roles, integrations, notifications, billing
+- **Dashboard** — Revenue KPIs, revenue vs expenses chart, revenue by client, active projects, due today tasks, recent invoices, open proposals
+- **Clients** — Client table with stage filters, client detail panel, new client modal
+- **Projects** — Project cards with status, progress, budget, hours; status filters
+- **Invoices** — Invoice table with status filters, invoice detail modal (line items, send/PDF)
+- **Proposals** — Proposal cards with pipeline value, win rate, follow-up actions
+- **Time Log** — Billable/non-billable KPIs, hours chart, time entries by date, log time modal
+- **Tasks** — Tasks by due (Today, Tomorrow, This Week), priority/category filters, new task modal
+- **Reports** — Period selector, revenue/hours/rate KPIs, monthly revenue chart, revenue by client, billable vs non-billable, proposal performance
+- **Settings** — Profile, rates & billing, integrations, notifications, plan & billing history
 
-## AI Customize
+## Themes
 
-Click the ✨ button in the header to open the AI Customize sidebar. Describe your organization, donors, and data in natural language. The AI can generate a custom `data.js` file. You can:
-
-- **Download ZIP** — Get the full project as a zip with your custom data
-- **Save to File** — Update `data.js` locally (requires write access; works in dev)
-
-Set `OPENROUTER_API_KEY` in `.env.local` to use the AI feature.
+Four themes are defined in `data.js`: **Dark**, **Light**, **Warm** (amber/terracotta), and **Slate** (blue-gray). Use the theme buttons in the sidebar to switch. The selected theme is stored in `localStorage` as `crm-theme`.
 
 ## Layout
 
-The app uses a single **Layout** (`app/admin/Layout.jsx`): sidebar on the left (HopeCRM branding, nav from `data.js`, annual goal widget, dark/light toggle), main content on the right with header (breadcrumb, search, notifications, AI button, settings, user avatar). The AI chatbot sidebar is included and unchanged.
+The app uses a single **Layout** (`app/admin/Layout.jsx`): sidebar on the left (Freelance CRM branding, nav from `data.js`, outstanding invoices widget, theme switcher), main content on the right with header (breadcrumb, search, notifications, settings, user avatar). The AI chatbot sidebar is included when enabled.
 
 ## Tech Stack
 

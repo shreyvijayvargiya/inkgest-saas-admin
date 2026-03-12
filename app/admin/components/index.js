@@ -1,10 +1,9 @@
 export { default as DashboardPage } from "./DashboardPage";
-export { default as DonorsPage } from "./DonorsPage";
-export { default as GrantsPage } from "./GrantsPage";
-export { default as CampaignsPage } from "./CampaignsPage";
-export { default as EventsPage } from "./EventsPage";
-export { default as VolunteersPage } from "./VolunteersPage";
+export { default as ClientsPage } from "./ClientsPage";
+export { default as ProjectsPage } from "./ProjectsPage";
+export { default as InvoicesPage } from "./InvoicesPage";
+export { default as ProposalsPage } from "./ProposalsPage";
+export { default as TimeLogPage } from "./TimeLogPage";
 export { default as TasksPage } from "./TasksPage";
 export { default as ReportsPage } from "./ReportsPage";
-export { default as CommsPage } from "./CommsPage";
 export { default as SettingsPage } from "./SettingsPage";
