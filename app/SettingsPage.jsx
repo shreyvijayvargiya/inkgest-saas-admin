@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { Card, SecHead, Field, Input, Btn, Pill } from "./Shared";
-import { useCRM } from "../Layout";
-import { STAFF_LIST, STAFF_COLOR, INTEGRATIONS } from "../data";
+import { useCRM } from "./Layout";
+import { STAFF_LIST, STAFF_COLOR, INTEGRATIONS } from "./data";
 
 export default function SettingsPage() {
 	const { t } = useCRM();

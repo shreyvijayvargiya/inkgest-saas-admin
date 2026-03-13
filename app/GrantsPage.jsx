@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { Card, Pill, Avatar, Btn, Modal, Field, Input, Select } from "./Shared";
-import { useCRM } from "../Layout";
-import { GRANTS, STAFF_COLOR, GRANT_STAGE_META } from "../data";
+import { useCRM } from "./Layout";
+import { GRANTS, STAFF_COLOR, GRANT_STAGE_META } from "./data";
 
 export default function GrantsPage() {
 	const { t } = useCRM();

@@ -1,4 +1,4 @@
-import VolunteersPage from "../app/admin/components/VolunteersPage";
+import VolunteersPage from "../app/VolunteersPage";
 
 export default function Volunteers() {
 	return <VolunteersPage />;

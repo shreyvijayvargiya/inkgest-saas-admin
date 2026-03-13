@@ -1,8 +1,8 @@
 "use client";
 
 import { Card, Pill, ProgressBar, Btn } from "./Shared";
-import { useCRM } from "../Layout";
-import { CAMPAIGNS } from "../data";
+import { useCRM } from "./Layout";
+import { CAMPAIGNS } from "./data";
 
 export default function CampaignsPage() {
 	const { t } = useCRM();

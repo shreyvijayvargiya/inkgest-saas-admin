@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { Card, Pill, Avatar, Btn, Modal, Field, Select } from "./Shared";
-import { useCRM } from "../Layout";
-import { STAFF_COLOR, PRIORITY_META } from "../data";
+import { useCRM } from "./Layout";
+import { STAFF_COLOR, PRIORITY_META } from "./data";
 
 export default function TasksPage() {
 	const { t, taskList, setTaskList } = useCRM();

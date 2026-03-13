@@ -1,4 +1,4 @@
-import DonorsPage from "../app/admin/components/DonorsPage";
+import DonorsPage from "../app/DonorsPage";
 
 export default function Donors() {
 	return <DonorsPage />;

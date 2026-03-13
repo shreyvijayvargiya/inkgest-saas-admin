@@ -2,7 +2,7 @@
  * HopeCRM — Re-exports from root data.js only.
  * Edit /data.js to customize all CRM data.
  */
-import root from "../../data.js";
+import root from "../data.js";
 
 export const THEMES = root.THEMES;
 export const THEME_OPTIONS = root.THEME_OPTIONS;

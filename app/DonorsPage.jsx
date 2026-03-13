@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { Card, Pill, Avatar, Btn, Modal, Field, Input, Select } from "./Shared";
-import { useCRM } from "../Layout";
-import { DONORS, STAFF_COLOR, STAGE_META, TIER_META, TYPE_META } from "../data";
+import { useCRM } from "./Layout";
+import { DONORS, STAFF_COLOR, STAGE_META, TIER_META, TYPE_META } from "./data";
 
 export default function DonorsPage() {
 	const { t } = useCRM();

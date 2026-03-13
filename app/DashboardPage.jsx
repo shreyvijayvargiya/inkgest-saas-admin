@@ -20,7 +20,7 @@ import {
 	Pill,
 	Avatar,
 } from "./Shared";
-import { useCRM } from "../Layout";
+import { useCRM } from "./Layout";
 import {
 	DONORS,
 	CAMPAIGNS,
@@ -30,7 +30,7 @@ import {
 	TYPE_META,
 	PRIORITY_META,
 	UPCOMING_DEADLINES,
-} from "../data";
+} from "./data";
 
 export default function DashboardPage() {
 	const { t, taskList, setTaskList } = useCRM();

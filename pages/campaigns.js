@@ -1,4 +1,4 @@
-import CampaignsPage from "../app/admin/components/CampaignsPage";
+import CampaignsPage from "../app/CampaignsPage";
 
 export default function Campaigns() {
 	return <CampaignsPage />;

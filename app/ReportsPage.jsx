@@ -15,7 +15,7 @@ import {
 	Cell,
 } from "recharts";
 import { Card, SecHead, ChartTip, StatCard, Pill, Avatar } from "./Shared";
-import { useCRM } from "../Layout";
+import { useCRM } from "./Layout";
 import {
 	raisedOverTime,
 	retentionData,
@@ -23,7 +23,7 @@ import {
 	volunteerHours,
 	STAFF_COLOR,
 	STAFF_PERF,
-} from "../data";
+} from "./data";
 
 export default function ReportsPage() {
 	const { t } = useCRM();
