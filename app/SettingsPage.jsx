@@ -17,29 +17,31 @@ export default function SettingsPage() {
 	];
 
 	return (
-		<div style={{ display: "grid", gridTemplateColumns: "180px 1fr", gap: 16 }}>
-			<Card t={t} p={10}>
-				{sections.map((s) => (
-					<div
-						key={s.id}
-						onClick={() => setSec(s.id)}
-						style={{
-							padding: "8px 12px",
-							borderRadius: 6,
-							fontSize: 12,
-							fontWeight: 600,
-							cursor: "pointer",
-							color: sec === s.id ? t.accent : t.textSub,
-							background: sec === s.id ? t.accentDim : "transparent",
-							marginBottom: 2,
-							transition: "all 0.12s",
-						}}
-					>
-						{s.label}
-					</div>
-				))}
+		<div className="flex flex-col gap-4 md:grid md:grid-cols-[180px_1fr] md:gap-4">
+			<Card t={t} p={10} style={{ minWidth: 0 }}>
+				<div className="flex flex-row gap-2 overflow-x-auto pb-1 -mx-1 md:flex-col md:overflow-visible md:mx-0 md:pb-0">
+					{sections.map((s) => (
+						<div
+							key={s.id}
+							onClick={() => setSec(s.id)}
+							className="shrink-0 md:shrink md:mb-0.5 last:md:mb-0"
+							style={{
+								padding: "8px 12px",
+								borderRadius: 6,
+								fontSize: 12,
+								fontWeight: 600,
+								cursor: "pointer",
+								color: sec === s.id ? t.accent : t.textSub,
+								background: sec === s.id ? t.accentDim : "transparent",
+								transition: "all 0.12s",
+							}}
+						>
+							{s.label}
+						</div>
+					))}
+				</div>
 			</Card>
-			<div>
+			<div className="min-w-0">
 				{sec === "profile" && (
 					<Card t={t}>
 						<SecHead t={t} title="Profile" sub="Your freelance identity" />
