@@ -11,6 +11,8 @@ export default function ProposalsPage() {
 	const { t } = useCRM();
 	const [proposals, setProposals] = useState(PROPOSALS);
 	const [showNewProposal, setShowNewProposal] = useState(false);
+	const [sf, setSf] = useState("All");
+	const filtered = proposals.filter((p) => sf === "All" || p.status === sf);
 	const wonVal = proposals.filter((p) => p.status === "Won").reduce(
 		(s, p) => s + p.value,
 		0,
@@ -90,16 +92,37 @@ export default function ProposalsPage() {
 			<div
 				style={{
 					display: "flex",
-					justifyContent: "flex-end",
+					gap: 8,
 					marginBottom: 14,
+					alignItems: "center",
+					flexWrap: "wrap",
 				}}
 			>
-				<Btn t={t} primary onClick={() => setShowNewProposal(true)}>
+				{["All", ...Object.keys(PROP_M)].map((s) => (
+					<div
+						key={s}
+						onClick={() => setSf(s)}
+						style={{
+							padding: "5px 12px",
+							borderRadius: 4,
+							fontSize: 11,
+							fontWeight: 700,
+							cursor: "pointer",
+							background:
+								sf === s ? PROP_M[s]?.color || t.accent : t.surfaceAlt,
+							color: sf === s ? "#fff" : t.textMuted,
+							transition: "all 0.15s",
+						}}
+					>
+						{s}
+					</div>
+				))}
+				<Btn t={t} primary onClick={() => setShowNewProposal(true)} style={{ marginLeft: "auto" }}>
 					+ New Proposal
 				</Btn>
 			</div>
 			<div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-				{proposals.map((prop) => {
+				{filtered.map((prop) => {
 					const sm = PROP_M[prop.status];
 					return (
 						<Card key={prop.id} t={t} p={18}>

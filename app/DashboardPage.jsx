@@ -35,20 +35,15 @@ import {
 	PROP_M,
 	PRI_M,
 } from "./data";
+import router from "next/router";
 
 export default function DashboardPage() {
 	const { t, taskList, setTaskList } = useCRM();
 	const totalOut = CLIENTS.reduce((s, c) => s + c.outstanding, 0);
 
 	return (
-		<div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-			<div
-				style={{
-					display: "grid",
-					gridTemplateColumns: "repeat(4,1fr)",
-					gap: 12,
-				}}
-			>
+		<div className="flex flex-col gap-6">
+			<div className="grid md:grid-cols-4 flex-wrap gap-4">
 				<KPI
 					t={t}
 					label="Revenue — Mar"
@@ -90,6 +85,7 @@ export default function DashboardPage() {
 						title="Revenue vs Expenses"
 						sub="Last 7 months"
 						action="Full report →"
+						onClick={() => router.push("/reports")}
 					/>
 					<ResponsiveContainer width="100%" height={200}>
 						<AreaChart
@@ -138,7 +134,7 @@ export default function DashboardPage() {
 					</ResponsiveContainer>
 				</Card>
 				<Card t={t}>
-					<SecHead t={t} title="Revenue by Client" />
+					<SecHead t={t} title="Revenue by Client" onClick={() => router.push("/clients")} />
 					<ResponsiveContainer width="100%" height={180}>
 						<PieChart>
 							<Pie
@@ -189,7 +185,7 @@ export default function DashboardPage() {
 							borderBottom: `1px solid ${t.border}`,
 						}}
 					>
-						<SecHead t={t} title="Active Projects" action="All →" />
+						<SecHead t={t} title="Active Projects" action="All →" onClick={() => router.push("/projects")} />
 					</div>
 					{PROJECTS.filter((p) => p.status !== "Completed")
 						.slice(0, 5)
@@ -241,7 +237,7 @@ export default function DashboardPage() {
 						})}
 				</Card>
 				<Card t={t}>
-					<SecHead t={t} title="Due Today" action="All tasks →" />
+					<SecHead t={t} title="Due Today" action="All tasks →" onClick={() => router.push("/tasks")} />
 					{taskList
 						.filter((x) => x.due === "Today")
 						.map((task, i, arr) => {
@@ -329,7 +325,7 @@ export default function DashboardPage() {
 							borderBottom: `1px solid ${t.border}`,
 						}}
 					>
-						<SecHead t={t} title="Recent Invoices" action="All →" />
+						<SecHead t={t} title="Recent Invoices" action="All →" onClick={() => router.push("/invoices")} />
 					</div>
 					{INVOICES.slice(0, 5).map((inv, i) => {
 						const sm = INV_M[inv.status];
@@ -379,7 +375,7 @@ export default function DashboardPage() {
 							borderBottom: `1px solid ${t.border}`,
 						}}
 					>
-						<SecHead t={t} title="Open Proposals" action="All →" />
+						<SecHead t={t} title="Open Proposals" action="All →" onClick={() => router.push("/proposals")} />
 					</div>
 					{PROPOSALS.filter((p) =>
 						["Sent", "Viewed", "Draft"].includes(p.status),

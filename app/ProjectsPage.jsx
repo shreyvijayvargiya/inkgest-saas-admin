@@ -1,7 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import { Card, Pill, Tag, Btn, CDot, ProgressBar, Modal, Field, Input, Select } from "./Shared";
+import {
+	Card,
+	Pill,
+	Tag,
+	Btn,
+	CDot,
+	ProgressBar,
+	Modal,
+	Field,
+	Input,
+	Select,
+} from "./Shared";
 import { useCRM } from "./Layout";
 import { PROJECTS, CLIENTS, STATUS_M } from "./data";
 
@@ -75,7 +86,12 @@ export default function ProjectsPage() {
 						{s}
 					</div>
 				))}
-				<Btn t={t} primary style={{ marginLeft: "auto" }} onClick={() => setShowNewProject(true)}>
+				<Btn
+					t={t}
+					primary
+					style={{ marginLeft: "auto" }}
+					onClick={() => setShowNewProject(true)}
+				>
 					+ New Project
 				</Btn>
 			</div>
@@ -177,7 +193,12 @@ export default function ProjectsPage() {
 					);
 				})}
 			</div>
-			<Modal show={showNewProject} t={t} title="New Project" onClose={() => setShowNewProject(false)}>
+			<Modal
+				show={showNewProject}
+				t={t}
+				title="New Project"
+				onClose={() => setShowNewProject(false)}
+			>
 				<form onSubmit={handleNewProject}>
 					<Field t={t} label="Project Name">
 						<Input t={t} name="name" placeholder="Design System v2" />
@@ -185,15 +206,26 @@ export default function ProjectsPage() {
 					<Field t={t} label="Client">
 						<Select t={t} name="client" options={CLIENTS.map((c) => c.name)} />
 					</Field>
-					<div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+					<div
+						style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}
+					>
 						<Field t={t} label="Status">
-							<Select t={t} name="status" options={["Draft", ...Object.keys(STATUS_M).filter((k) => k !== "Draft")]} />
+							<Select
+								t={t}
+								name="status"
+								options={[
+									"Draft",
+									...Object.keys(STATUS_M).filter((k) => k !== "Draft"),
+								]}
+							/>
 						</Field>
 						<Field t={t} label="Type">
 							<Select t={t} name="type" options={PROJECT_TYPES} />
 						</Field>
 					</div>
-					<div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+					<div
+						style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}
+					>
 						<Field t={t} label="Budget ($)">
 							<Input t={t} name="budget" type="number" placeholder="5000" />
 						</Field>

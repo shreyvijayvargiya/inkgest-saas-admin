@@ -6,12 +6,19 @@ export default function Document() {
 			<Head>
 				<meta charSet="utf-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
-				<meta name="description" content="EstateOS Real Estate CRM — Manage leads, listings, pipeline, and grow your real estate business." />
+				<meta
+					name="description"
+					content="freelanceCRM Real Estate CRM — Manage leads, listings, pipeline, and grow your real estate business."
+				/>
 				<meta name="theme-color" content="#09090b" />
-				<title>EstateOS — Real Estate CRM</title>
+				<title>freelanceCRM — Real Estate CRM</title>
 				<link rel="icon" href="/favicon.ico" />
 				<link rel="preconnect" href="https://fonts.googleapis.com" />
-				<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+				<link
+					rel="preconnect"
+					href="https://fonts.gstatic.com"
+					crossOrigin="anonymous"
+				/>
 			</Head>
 			<body>
 				<Main />
@@ -20,4 +27,3 @@ export default function Document() {
 		</Html>
 	);
 }
-
