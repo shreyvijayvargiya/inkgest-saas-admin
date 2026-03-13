@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { Card, Pill, Avatar, Btn, Modal, Field, Input, Select } from "./Shared";
-import { useCRM } from "../Layout";
-import { DONORS, STAFF_COLOR, STAGE_META, TIER_META, TYPE_META } from "../data";
+import { useCRM } from "./Layout";
+import { DONORS, STAFF_COLOR, STAGE_META, TIER_META, TYPE_META } from "./data";
 
 export default function DonorsPage() {
 	const { t } = useCRM();
@@ -483,95 +483,93 @@ export default function DonorsPage() {
 				</div>
 			)}
 
-			{showForm && (
-				<Modal t={t} title="Add New Donor" onClose={() => setShowForm(false)}>
-					<Field t={t} label="FULL NAME / ORG">
-						<Input t={t} placeholder="The Ellison Family" />
+			<Modal
+				show={showForm}
+				t={t}
+				title="Add New Donor"
+				onClose={() => setShowForm(false)}
+			>
+				<Field t={t} label="FULL NAME / ORG">
+					<Input t={t} placeholder="The Ellison Family" />
+				</Field>
+				<Field t={t} label="EMAIL">
+					<Input t={t} placeholder="contact@email.com" type="email" />
+				</Field>
+				<Field t={t} label="PHONE">
+					<Input t={t} placeholder="+1 (415) 555-0000" type="tel" />
+				</Field>
+				<div
+					style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}
+				>
+					<Field t={t} label="TYPE">
+						<Select
+							t={t}
+							options={["Individual", "Foundation", "Corporate", "Government"]}
+						/>
 					</Field>
-					<Field t={t} label="EMAIL">
-						<Input t={t} placeholder="contact@email.com" type="email" />
+					<Field t={t} label="TIER">
+						<Select t={t} options={["Major", "Mid-Level", "General"]} />
 					</Field>
-					<Field t={t} label="PHONE">
-						<Input t={t} placeholder="+1 (415) 555-0000" type="tel" />
+				</div>
+				<div
+					style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}
+				>
+					<Field t={t} label="STAGE">
+						<Select t={t} options={Object.keys(STAGE_META)} />
 					</Field>
-					<div
-						style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}
-					>
-						<Field t={t} label="TYPE">
-							<Select
-								t={t}
-								options={[
-									"Individual",
-									"Foundation",
-									"Corporate",
-									"Government",
-								]}
-							/>
-						</Field>
-						<Field t={t} label="TIER">
-							<Select t={t} options={["Major", "Mid-Level", "General"]} />
-						</Field>
-					</div>
-					<div
-						style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}
-					>
-						<Field t={t} label="STAGE">
-							<Select t={t} options={Object.keys(STAGE_META)} />
-						</Field>
-						<Field t={t} label="SOURCE">
-							<Select
-								t={t}
-								options={[
-									"Board Referral",
-									"Grant Portal",
-									"Gala Event",
-									"Website",
-									"Cold Outreach",
-									"Direct Mail",
-								]}
-							/>
-						</Field>
-					</div>
-					<Field t={t} label="ASSIGN TO STAFF">
+					<Field t={t} label="SOURCE">
 						<Select
 							t={t}
 							options={[
-								"AM — Alex Martinez",
-								"JT — Jamie Torres",
-								"RK — Rachel Kim",
-								"NP — Nina Patel",
-								"LW — Leo Walsh",
+								"Board Referral",
+								"Grant Portal",
+								"Gala Event",
+								"Website",
+								"Cold Outreach",
+								"Direct Mail",
 							]}
 						/>
 					</Field>
-					<Field t={t} label="NOTES">
-						<textarea
-							rows={3}
-							placeholder="Initial notes..."
-							style={{
-								width: "100%",
-								padding: "10px 14px",
-								borderRadius: 12,
-								border: `1.5px solid ${t.border}`,
-								background: t.surfaceAlt,
-								color: t.text,
-								fontSize: 13,
-								outline: "none",
-								resize: "vertical",
-								fontFamily: "inherit",
-							}}
-						/>
-					</Field>
-					<div style={{ display: "flex", gap: 8, marginTop: 6 }}>
-						<Btn t={t} primary style={{ flex: 1 }}>
-							Save Donor
-						</Btn>
-						<Btn t={t} onClick={() => setShowForm(false)}>
-							Cancel
-						</Btn>
-					</div>
-				</Modal>
-			)}
+				</div>
+				<Field t={t} label="ASSIGN TO STAFF">
+					<Select
+						t={t}
+						options={[
+							"AM — Alex Martinez",
+							"JT — Jamie Torres",
+							"RK — Rachel Kim",
+							"NP — Nina Patel",
+							"LW — Leo Walsh",
+						]}
+					/>
+				</Field>
+				<Field t={t} label="NOTES">
+					<textarea
+						rows={3}
+						placeholder="Initial notes..."
+						style={{
+							width: "100%",
+							padding: "10px 14px",
+							borderRadius: 12,
+							border: `1.5px solid ${t.border}`,
+							background: t.surfaceAlt,
+							color: t.text,
+							fontSize: 13,
+							outline: "none",
+							resize: "vertical",
+							fontFamily: "inherit",
+						}}
+					/>
+				</Field>
+				<div style={{ display: "flex", gap: 8, marginTop: 6 }}>
+					<Btn t={t} primary style={{ flex: 1 }}>
+						Save Donor
+					</Btn>
+					<Btn t={t} onClick={() => setShowForm(false)}>
+						Cancel
+					</Btn>
+				</div>
+			</Modal>
 		</div>
 	);
 }

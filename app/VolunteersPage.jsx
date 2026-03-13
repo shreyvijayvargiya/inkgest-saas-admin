@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { Card, Pill, Btn } from "./Shared";
-import { useCRM } from "../Layout";
-import { VOLUNTEERS } from "../data";
+import { useCRM } from "./Layout";
+import { VOLUNTEERS } from "./data";
 
 export default function VolunteersPage() {
 	const { t } = useCRM();

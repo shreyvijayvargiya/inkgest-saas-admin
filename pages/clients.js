@@ -1,4 +1,4 @@
-import ClientsPage from "../app/admin/components/ClientsPage";
+import ClientsPage from "../app/ClientsPage";
 
 export default function Clients() {
 	return <ClientsPage />;

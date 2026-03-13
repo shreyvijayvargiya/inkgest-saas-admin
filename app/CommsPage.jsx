@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { Card, Pill, ProgressBar, Btn } from "./Shared";
-import { useCRM } from "../Layout";
-import { EMAIL_TEMPLATES, SEQUENCES } from "../data";
+import { useCRM } from "./Layout";
+import { EMAIL_TEMPLATES, SEQUENCES } from "./data";
 
 export default function CommsPage() {
 	const { t } = useCRM();

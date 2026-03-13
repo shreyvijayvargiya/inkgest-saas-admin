@@ -1,4 +1,4 @@
-import InvoicesPage from "../app/admin/components/InvoicesPage";
+import InvoicesPage from "../app/InvoicesPage";
 
 export default function Invoices() {
 	return <InvoicesPage />;

@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { Card, Pill, Avatar, Btn, Modal, Field, Input, Select } from "./Shared";
-import { useCRM } from "../Layout";
-import { GRANTS, STAFF_COLOR, GRANT_STAGE_META } from "../data";
+import { useCRM } from "./Layout";
+import { GRANTS, STAFF_COLOR, GRANT_STAGE_META } from "./data";
 
 export default function GrantsPage() {
 	const { t } = useCRM();
@@ -214,80 +214,82 @@ export default function GrantsPage() {
 					);
 				})}
 			</div>
-
-			{showForm && (
-				<Modal t={t} title="Add New Grant" onClose={() => setShowForm(false)}>
-					<Field t={t} label="FUNDER NAME">
-						<Input t={t} placeholder="Foundation or org name" />
+			<Modal
+				show={showForm}
+				t={t}
+				title="Add New Grant"
+				onClose={() => setShowForm(false)}
+			>
+				<Field t={t} label="FUNDER NAME">
+					<Input t={t} placeholder="Foundation or org name" />
+				</Field>
+				<div
+					style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}
+				>
+					<Field t={t} label="AMOUNT">
+						<Input t={t} placeholder="$75,000" />
 					</Field>
-					<div
-						style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}
-					>
-						<Field t={t} label="AMOUNT">
-							<Input t={t} placeholder="$75,000" />
-						</Field>
-						<Field t={t} label="DEADLINE">
-							<Input t={t} placeholder="Apr 15, 2026" type="text" />
-						</Field>
-					</div>
-					<div
-						style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}
-					>
-						<Field t={t} label="STAGE">
-							<Select t={t} options={Object.keys(GRANT_STAGE_META)} />
-						</Field>
-						<Field t={t} label="PROGRAM AREA">
-							<Select
-								t={t}
-								options={[
-									"Education",
-									"Housing",
-									"Health",
-									"Youth Dev.",
-									"Arts",
-									"Technology",
-									"Environment",
-								]}
-							/>
-						</Field>
-					</div>
-					<Field t={t} label="ASSIGN TO STAFF">
+					<Field t={t} label="DEADLINE">
+						<Input t={t} placeholder="Apr 15, 2026" type="text" />
+					</Field>
+				</div>
+				<div
+					style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}
+				>
+					<Field t={t} label="STAGE">
+						<Select t={t} options={Object.keys(GRANT_STAGE_META)} />
+					</Field>
+					<Field t={t} label="PROGRAM AREA">
 						<Select
 							t={t}
 							options={[
-								"AM — Alex Martinez",
-								"JT — Jamie Torres",
-								"RK — Rachel Kim",
+								"Education",
+								"Housing",
+								"Health",
+								"Youth Dev.",
+								"Arts",
+								"Technology",
+								"Environment",
 							]}
 						/>
 					</Field>
-					<Field t={t} label="NOTES">
-						<textarea
-							rows={3}
-							style={{
-								width: "100%",
-								padding: "10px 14px",
-								borderRadius: 12,
-								border: `1.5px solid ${t.border}`,
-								background: t.surfaceAlt,
-								color: t.text,
-								fontSize: 13,
-								outline: "none",
-								resize: "vertical",
-								fontFamily: "inherit",
-							}}
-						/>
-					</Field>
-					<div style={{ display: "flex", gap: 8, marginTop: 6 }}>
-						<Btn t={t} primary style={{ flex: 1 }}>
-							Save Grant
-						</Btn>
-						<Btn t={t} onClick={() => setShowForm(false)}>
-							Cancel
-						</Btn>
-					</div>
-				</Modal>
-			)}
+				</div>
+				<Field t={t} label="ASSIGN TO STAFF">
+					<Select
+						t={t}
+						options={[
+							"AM — Alex Martinez",
+							"JT — Jamie Torres",
+							"RK — Rachel Kim",
+						]}
+					/>
+				</Field>
+				<Field t={t} label="NOTES">
+					<textarea
+						rows={3}
+						style={{
+							width: "100%",
+							padding: "10px 14px",
+							borderRadius: 12,
+							border: `1.5px solid ${t.border}`,
+							background: t.surfaceAlt,
+							color: t.text,
+							fontSize: 13,
+							outline: "none",
+							resize: "vertical",
+							fontFamily: "inherit",
+						}}
+					/>
+				</Field>
+				<div style={{ display: "flex", gap: 8, marginTop: 6 }}>
+					<Btn t={t} primary style={{ flex: 1 }}>
+						Save Grant
+					</Btn>
+					<Btn t={t} onClick={() => setShowForm(false)}>
+						Cancel
+					</Btn>
+				</div>
+			</Modal>
 		</div>
 	);
 }

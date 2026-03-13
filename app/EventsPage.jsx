@@ -1,8 +1,8 @@
 "use client";
 
 import { Card, Pill, ProgressBar } from "./Shared";
-import { useCRM } from "../Layout";
-import { EVENTS, EVENT_TYPE_COLOR } from "../data";
+import { useCRM } from "./Layout";
+import { EVENTS, EVENT_TYPE_COLOR } from "./data";
 
 export default function EventsPage() {
 	const { t } = useCRM();
