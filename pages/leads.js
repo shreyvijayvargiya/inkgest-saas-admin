@@ -1,4 +1,4 @@
-import LeadsPage from "../app/admin/components/pages/LeadsPage";
+import LeadsPage from "../app/LeadsPage";
 
 export default function Leads() {
 	return <LeadsPage />;

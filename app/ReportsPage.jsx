@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
-import { Card, SecHead, ChartTip, Pill, Avatar, Btn } from "../Shared";
-import { useCRM } from "../../RealEstateLayout";
-import { revenueData, sourceData, agentPerf, agentColor, AGENTS_DATA, monthlyDeals, convData } from "../../data";
+import { Card, SecHead, ChartTip, Pill, Avatar, Btn } from "../components/ui";
+import { useCRM } from "./RealEstateLayout";
+import { revenueData, sourceData, agentPerf, agentColor, AGENTS_DATA, monthlyDeals, convData } from "../data";
 
 export default function ReportsPage() {
 	const { t } = useCRM();

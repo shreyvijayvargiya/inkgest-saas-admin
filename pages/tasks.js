@@ -1,4 +1,4 @@
-import TasksPage from "../app/admin/components/pages/TasksPage";
+import TasksPage from "../app/TasksPage";
 
 export default function Tasks() {
 	return <TasksPage />;

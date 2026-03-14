@@ -1,4 +1,4 @@
-import ListingsPage from "../app/admin/components/pages/ListingsPage";
+import ListingsPage from "../app/ListingsPage";
 
 export default function Listings() {
 	return <ListingsPage />;

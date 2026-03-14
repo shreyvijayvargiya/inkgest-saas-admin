@@ -1,4 +1,4 @@
-import OutreachPage from "../app/admin/components/pages/OutreachPage";
+import OutreachPage from "../app/OutreachPage";
 
 export default function Outreach() {
 	return <OutreachPage />;

@@ -1,4 +1,4 @@
-import PipelinePage from "../app/admin/components/pages/PipelinePage";
+import PipelinePage from "../app/PipelinePage";
 
 export default function Pipeline() {
 	return <PipelinePage />;
